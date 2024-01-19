@@ -1,0 +1,12 @@
+name = "fruhling"
+license = "MIT"
+description = "Theme created for the https://romka.eu blog"
+homepage = "https://romka.eu"
+tags = ["Blog", "Responsive", "Personal", "Minimal", "Clean", "Disqus", "Google Analytics"]
+features = []
+min_version = "0.0.1"
+
+[author]
+    name = "romka"
+    homepage = "https://romka.eu"
+

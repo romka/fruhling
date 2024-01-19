@@ -1,0 +1,25 @@
+<footer class="web-footer footer bg-color-white">
+    <div class="footer-widgets pt-75px pb-30px">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 m30px">
+                    <div class="footer-widget">
+                        {{ $footerPath := "" }}
+                        {{ if fileExists (printf "%s%s%s" "/content/footer/index." .Site.Language.Lang ".md") }}
+                            {{ $footerPath = (printf "%s%s%s" "/content/footer/index." .Site.Language.Lang ".md") }}
+                        {{ else }}
+                            {{ if fileExists "/content/footer/index.en.md" }}
+                                {{ $footerPath = "/content/footer/index.en.md" }}
+                            {{ end }}
+                        {{ end }}
+
+                        {{ if $footerPath }}
+                            {{ $footer := .Site.GetPage $footerPath }}
+                        <p>{{ $footer.Content }}</p>
+                        {{ end }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

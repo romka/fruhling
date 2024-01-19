@@ -1,0 +1,72 @@
+{{ $gallery := . }}
+
+{{ $lines := split $gallery.RawContent "\n" }}
+{{ $map := dict }}
+{{- $videos := dict -}}
+{{ range $lines }}
+    {{ $descr := split . ";" }}
+    {{- if strings.Contains (index $descr 0) ":" -}}
+        {{- $imgVideo := split (index $descr 0) ":"  -}}
+        {{ $map = merge $map (dict (index $imgVideo 0) (index $descr 1)) }}
+        {{- $videos = merge $videos (dict (index $imgVideo 0) (index $imgVideo 1)) -}}
+    {{- else -}}
+        {{ $map = merge $map (dict (index $descr 0) (index $descr 1)) }}
+    {{- end -}}
+{{ end }}
+
+<div class="col-md-12 col-lg-12{{ if .Draft }} draft{{ end }}">
+    <article>
+        <div class="post_text post_text_top_radius">
+            <div class="post_meta_top">
+                {{- partial "partials/shared/tags.html" . -}}
+                {{- partial "partials/shared/date.html" . -}}
+            </div>
+            <h1 class="post_title"><a href="{{ .RelPermalink | relURL }}">{{ .Title }}</a></h1>
+
+            <div class="post_img {{ if .Draft }} draft{{ end }}">
+                <div class="masonry-gallery">
+                    <div class="grid-sizer"></div>
+                    <div class="title-gallery" style="text-align: center">
+                        {{- $photosCount := (or .Params.summary_photos_count 10) -}}
+                        {{- range first $photosCount ($gallery.Resources.ByType "image") -}}
+                            {{- $preview := .Fit "970x728 q90" -}}
+                            {{- $thumb := .Fit "96x76" -}}
+                            {{- $image := .Fit "1920x1920 q90" -}}
+                            {{- $originalImage := . -}}
+                            {{- with .Exif -}}
+                                {{- if eq 6 .Tags.Orientation -}}
+                                    {{- $image = $originalImage.Fit "1920x1920 q90 r270" -}}
+                                {{- else if eq 8 .Tags.Orientation -}}
+                                    {{- $image = $originalImage.Fit "1920x1920 q90 r90" -}}
+                                {{- else if eq 3 .Tags.Orientation -}}
+                                    {{- $image = $originalImage.Fit "1920x1920 q90 r180" -}}
+                                {{- end -}}
+                                {{- $preview = $image.Fit "970x728 q100" -}}
+                                {{- $thumb = $image.Fit "96x76 q100" -}}
+                            {{- end -}}
+
+                            {{- $title := index $map .Name -}}
+
+                        {{- if isset $videos .Name -}}
+                            {{- if strings.Contains (index $videos .Name) "youtu" -}}
+                            <figure data-src="{{- index $videos .Name -}}" data-poster="{{ $image.RelPermalink | relURL }}" class="grid-item">
+                                <img src="{{ $preview.RelPermalink | relURL }}" alt="{{ $title }}">
+                            </figure>
+                            {{- else -}}
+                            <figure data-video='{"source": [{"src":"{{- $gallery.RelPermalink -}}{{- index $videos .Name -}}", "type":"video/mp4"}], "attributes": {"preload": false, "controls": true}}' data-poster="{{ $image.RelPermalink | relURL }}" class="grid-item">
+                                <img src="{{ $preview.RelPermalink | relURL }}" alt="{{ $title }}">
+                            </figure>
+                            {{- end -}}
+                        {{- else -}}
+                            <figure data-src="{{ $image.RelPermalink | relURL }}" data-thumb="{{ $thumb.RelPermalink | relURL }}" class="grid-item">
+                                <img src="{{ $preview.RelPermalink | relURL }}" alt="{{ $title }}">
+                            </figure>
+                        {{- end -}}
+                        {{- end -}}
+                    </div>
+                </div>
+            </div>
+            <div class="post_nav"><a href="{{ .RelPermalink | relURL }}" class="link-arrow">{{ i18n "fullGallery" }} ➠</a></div>
+        </div>
+    </article>
+</div>

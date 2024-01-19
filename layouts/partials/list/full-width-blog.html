@@ -1,0 +1,27 @@
+<div class="col-md-12 col-lg-12{{ if .Draft }} draft{{ end }}">
+    <article>
+        {{ partial "shared/post-title-image-or-gallery.html" . }}
+        {{- $topRadius := "" -}}
+        {{- $images := .Resources.ByType "image" -}}
+        {{- $image := ($images.GetMatch "*cover*")  -}}
+        {{- $titleGalleryLen := len (string .Page.Params.title_gallery) -}}
+        {{- $coverImageLen := len (string $image)  -}}
+        {{- if and (eq $titleGalleryLen 0) (eq $coverImageLen 0) -}}{{- $topRadius = " post_text_top_radius" -}}{{- end -}}
+        <div class="post_text{{ $topRadius }}">
+            <div class="post_meta_top">
+                {{- partial "partials/shared/links-to-translations.html" . .Page -}}
+                {{- partial "partials/shared/tags.html" . -}}
+                {{- partial "partials/shared/date.html" . -}}
+            </div>
+            <h1 class="post_title"><a href="{{ .RelPermalink | relURL }}">{{ .Title }}</a></h1>
+            <div class="post_content{{ if not .Truncated }} padding_bottom{{ end }}">
+                {{ if in .RawContent "<!--more-->" }}
+                {{ .Summary }}
+                {{ else }}
+                <p>{{ .Summary | markdownify }}</p>
+                {{ end }}
+            </div>
+            {{- if .Truncated -}}<div class="post_nav"><a href="{{ .RelPermalink | relURL }}#read-more" class="link-arrow">{{ i18n "readMore" }} ➠</a></div>{{- end -}}
+        </div>
+    </article>
+</div>

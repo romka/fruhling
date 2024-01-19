@@ -1,0 +1,2 @@
+{{ $resource := $.Page.Resources.GetMatch (.Get 0)}}
+<div class="float-right"><img src="{{- $resource.Permalink | relURL }}" title="{{- (.Get 1) -}}" alt="{{- (.Get 1) -}}" class="zoomable"></div>

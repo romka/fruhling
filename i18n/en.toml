@@ -1,0 +1,14 @@
+[readMore]
+    other = 'Read more'
+[fullGallery]
+    other = 'View full gallery'
+[fileNotFound]
+    other = 'File not found'
+[blog]
+    other = 'Blog'
+[photogalleries]
+    other = 'Photogalleries'
+[stories]
+    other = 'Stories'
+[deprecated]
+    other = "It's a deprecated post, that was imported from the old version of this site. The examples and code snippets here are not working and can't be restored"

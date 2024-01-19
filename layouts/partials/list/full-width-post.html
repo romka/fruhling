@@ -1,0 +1,9 @@
+{{- if eq .Page.Type "gallery" -}}
+    {{- partial "partials/list/full-width-gallery.html" . -}}
+{{- else if eq .Page.Type "note" -}}
+    {{- partial "partials/list/full-width-note.html" . -}}
+{{- else if eq .Page.Type "story" -}}
+    {{- partial "partials/list/full-width-story.html" . -}}
+{{- else -}}
+    {{- partial "partials/list/full-width-blog.html" . -}}
+{{- end -}}

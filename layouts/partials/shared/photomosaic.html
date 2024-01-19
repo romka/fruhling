@@ -1,0 +1,18 @@
+<div class="page_main_title mb-60px title_photomosaic_container">
+    <div class="container title_photomosaic">
+        <div class="col-lg-12 text-left page-title">
+            {{- if (eq .Page.Kind "term") -}}
+            <h3>{{ i18n "blog" }} #{{- .Data.Term -}}</h3>
+            {{ else if and (eq .Page.Kind "section") (eq .Page.Type "gallery") -}}
+            <h3>{{ i18n "photogalleries" }}</h3>
+            {{ else if and (eq .Page.Kind "section") (eq .Page.Type "story") -}}
+            <h3>{{ i18n "stories" }}</h3>
+            {{- end -}}
+        </div>
+    </div>
+
+    {{- $seq := seq .Site.Params.photomosaic.numberOfUniqueMosaics -}}
+    {{- $seq = shuffle $seq -}}
+    {{- $cacheId := first 1 $seq -}}
+    {{- partialCached "partials/shared/photomosaic-impl.html" . $cacheId -}}
+</div>

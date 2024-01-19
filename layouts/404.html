@@ -1,0 +1,13 @@
+{{- define "photomosaic" -}}
+{{- partial "partials/shared/photomosaic.html" . -}}
+{{- end -}}
+
+{{- define "content" -}}
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col-lg-10 not-found">
+            <p>404 {{ i18n "fileNotFound" }}</p>
+        </div>
+    </div>
+</div>
+{{- end -}}

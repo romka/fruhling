@@ -1,0 +1,34 @@
+{{- define "photomosaic" -}}
+{{- partial "partials/shared/photomosaic.html" . -}}
+{{- end -}}
+
+{{- define "content" -}}
+
+{{- $firstColumn := slice -}}
+{{- $secondColumn := slice -}}
+{{- $thirdColumn := slice -}}
+{{- $current := -1 -}}
+
+<div class="container blog_posts">
+{{- range (.Paginator 30).Pages -}}
+    {{- if gt $current 1 -}}{{- $current = 0 -}}{{- else -}}{{- $current = add $current 1 -}}{{- end -}}
+
+    {{- if eq $current 0 -}}
+        <div class="row">
+    {{- end -}}
+            <div class="cardPostStyle col-md-6 col-lg-4">
+            {{- partialCached "list/one-third-width-gallery.html" . .RelPermalink -}}
+            </div>
+    {{- if eq $current 2 -}}
+        </div>
+    {{- end -}}
+{{- end -}}
+    {{- if ne $current 2 -}}</div>{{- end -}}
+<div>
+    <nav class="pagination_holder">
+        {{- template "_internal/pagination.html" . -}}
+    </nav>
+</div>
+
+</div>
+{{- end -}}

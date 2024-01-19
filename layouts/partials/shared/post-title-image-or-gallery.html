@@ -1,0 +1,11 @@
+{{ $titleGallery := .Page.Params.title_gallery }}
+{{ if $titleGallery }}
+    {{ partial "embedded-gallery-partial.html" . $titleGallery }}
+{{ else }}
+    {{ $images := .Resources.ByType "image" }}
+    {{ with $image := ($images.GetMatch "*cover*") }}
+<div class="post_img">
+    <img src="{{ $image.RelPermalink | relURL }}" alt="{{ .Title }}" class="zoomable">
+</div>
+    {{ end }}
+{{ end }}

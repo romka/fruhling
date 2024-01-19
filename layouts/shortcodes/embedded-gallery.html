@@ -1,0 +1,62 @@
+{{- $name := .Get 0 -}}
+{{- $path := printf "%s%s" "embedded-gallery/" $name -}}
+{{- $contentPath := printf "%s%s" "content/" $path -}}
+{{- $allowedExtentions := ".jpg .jpeg .gif .tiff .webp .svg .eps .ai .xcf .png" -}}
+{{- $imgCount := 0 -}}
+
+{{- if os.FileExists $contentPath -}}
+    {{- range os.ReadDir $contentPath -}}
+        {{- $filePath := printf "%s/%s" $contentPath .Name -}}
+        {{- if not .IsDir -}}
+            {{- $ext := path.Ext $filePath -}}
+            {{- $isImage := in $allowedExtentions (lower $ext) -}}
+            {{- if $isImage -}}
+                {{- $imgCount = add $imgCount 1 -}}
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
+    {{- if eq $imgCount 0 -}}
+        **Error rendering embedded gallery. Directory "{{- $contentPath -}}" doesn't contain files of types {{ $allowedExtentions }}.**
+    {{- else -}}
+        {{- $gallery := .Site.GetPage $path -}}
+        {{- $lines := split $gallery.RawContent "\n" -}}
+        {{- $map := dict -}}
+        {{- range $lines -}}
+            {{- $descr := split . ";" -}}
+            {{- $map = merge $map (dict (index $descr 0) (index $descr 1)) -}}
+        {{- end -}}
+<div class="post_internal_gallery swiper">
+    <div class="swiper-wrapper title-gallery" style="text-align: center">
+        {{- range $gallery.Resources.ByType "image" -}}
+            {{- $originalImage := . -}}
+            {{- $preview := $originalImage.Fit "970x728" -}}
+            {{- $thumb := $originalImage.Fit "96x76" -}}
+            {{- $title := index $map $originalImage.Name -}}
+            {{- $image := $originalImage.Fit "1920x1920 q90" -}}
+            {{- with $originalImage.Exif -}}
+                {{- if eq 6 .Tags.Orientation -}}
+                    {{- $image = $originalImage.Fit "1920x1920 q90 r270" -}}
+                    {{- $preview = $image.Fit "970x728 q100 r270" -}}
+                    {{- $thumb = $image.Fit "96x76 q100 r270" -}}
+                {{- else if eq 8 .Tags.Orientation -}}
+                    {{- $image = $originalImage.Fit "1920x1920 q90 r90" -}}
+                    {{- $preview = $image.Fit "970x728 q100 r90" -}}
+                    {{- $thumb = $image.Fit "96x76 q100 r90" -}}
+                {{- else if eq 3 .Tags.Orientation -}}
+                    {{- $image = $originalImage.Fit "1920x1920 q90 r180" -}}
+                    {{- $preview = $image.Fit "970x728 q100 r180" -}}
+                    {{- $thumb = $image.Fit "96x76 q100 r180" -}}
+                {{- end -}}
+            {{- end -}}
+
+        <figure data-src="{{ $image.RelPermalink | relLangURL }}" data-thumb="{{ $thumb.RelPermalink | relLangURL }}" class="swiper-slide">
+            <img src="{{ $preview.RelPermalink | relLangURL }}" alt="{{ $title }}">
+        </figure>
+        {{- end -}}
+    </div>
+    <div class="swiper-pagination"></div>
+</div>
+    {{- end -}}
+{{- else -}}
+    **Error rendering embedded gallery. Path "{{- $contentPath -}}" is not exists.**
+{{- end -}}

@@ -1,0 +1,37 @@
+    {{- $photomosiacData := (partialCached "partials/shared/photomosaic-data.html" . ) -}}
+    {{- $randomPhotos := slice -}}
+    {{- range $index, $unused :=  $photomosiacData -}}
+    {{- $randomPhotos = $randomPhotos | append $index -}}
+    {{- end -}}
+
+    {{- $randomPhotos = shuffle $randomPhotos -}}
+    {{- $randomPhotos = first 31 $randomPhotos -}}
+
+    <div id="photo-mosaic">
+        {{- range $randomPhotos -}}
+        {{- $randomPhoto := index $photomosiacData . -}}
+        {{- $photo := index $randomPhoto 0 -}}
+        {{- $descr := index $randomPhoto 1 -}}
+        {{- $galleryPath := index $randomPhoto 2 -}}
+        {{- $galleryTitle := index $randomPhoto 3 -}}
+        {{- $text := printf "%s. %s" $galleryTitle $descr -}}
+        {{- $thumb := $photo.Fill "200x150 q100" -}}
+        {{- with $photo.Exif -}}
+            {{- if eq 6 .Tags.Orientation -}}
+                {{- $thumb = $photo.Fill "200x150 q100 r270" -}}
+            {{- else if eq 8 .Tags.Orientation -}}
+                {{- $thumb = $photo.Fill "200x150 q100 r90" -}}
+            {{- else if eq 3 .Tags.Orientation -}}
+                {{- $thumb = $photo.Fill "200x150 q100 r180" -}}
+            {{- end -}}
+        {{- end -}}
+
+        <a href="{{ $photo.RelPermalink | relURL }}" data-sub-html='<strong><a href="{{ $galleryPath }}">{{ $galleryTitle }}</a></strong>{{ if $descr }}. {{ $descr }}{{ end }}' title="{{ $descr }}">
+            <div class="divimg">
+                <figure data-src="{{ $thumb.RelPermalink | relURL }}" data-thumb="{{ $thumb.RelPermalink | relURL }}" class="swiper-slide">
+                    <img src="{{ $thumb.RelPermalink | relURL }}" alt="{{ $text }}">
+                </figure>
+            </div>
+        </a>
+        {{- end -}}
+    </div>

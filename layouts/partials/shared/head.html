@@ -1,0 +1,35 @@
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {{ hugo.Generator }}
+    {{ with .Site.Params.logo }}<link rel="shortcut icon" href="{{ . | urlize | relURL }}">{{ end }}
+    <title>{{ .Page.Title }} | {{ .Site.Title }}</title>
+    {{ with .Site.Params.meta.description }}<meta name="description" content="{{ . }}">{{ end }}
+    {{ with .Site.Params.meta.keywords }}<meta name="keywords" content="{{ . }}">{{ end }}
+
+    {{- partial "partials/shared/opengraph.html" . -}}
+
+    {{- $booststrap := resources.Get "/css/bootstrap.min.css" | resources.Fingerprint -}}
+    {{- $themeModules := resources.Get "/css/theme-modules.css" | resources.Fingerprint -}}
+    {{- $photoMosaic := resources.Get "/css/photo-mosaic.css" | resources.Fingerprint -}}
+    {{- $lightGallery := resources.Get "/libs/lightgallery/css/lightgallery.css" | resources.Fingerprint -}}
+    {{- $lgFullscreen := resources.Get "/libs/lightgallery/css/lg-fullscreen.css" | resources.Fingerprint -}}
+    {{- $lgVideo := resources.Get "/libs/lightgallery/css/lg-video.css" | resources.Fingerprint -}}
+    {{- $lgMediumZoom := resources.Get "/libs/lightgallery/css/lg-medium-zoom.css" | resources.Fingerprint -}}
+    {{- $lgThumbnail := resources.Get "/libs/lightgallery/css/lg-thumbnail.css" | resources.Fingerprint -}}
+    {{- $lgPager := resources.Get "/libs/lightgallery/css/lg-pager.css" | resources.Fingerprint -}}
+    {{- $swiper := resources.Get "/libs/swiper/swiper-bundle.min.css" | resources.Fingerprint -}}
+    {{- $custom := resources.Get "/css/custom.css" | resources.Fingerprint -}}
+    <link type="text/css" rel="stylesheet" href="{{ $booststrap.RelPermalink | relURL }}" integrity="{{ $booststrap.Data.Integrity }}">
+    <link type="text/css" rel="stylesheet" href="{{ $themeModules.RelPermalink | relURL }}" integrity="{{ $themeModules.Data.Integrity }}">
+    <link type="text/css" rel="stylesheet" href="{{ $photoMosaic.RelPermalink | relURL }}" integrity="{{ $photoMosaic.Data.Integrity }}">
+    <link type="text/css" rel="stylesheet" href="{{ $lightGallery.RelPermalink | relURL }}" integrity="{{ $lightGallery.Data.Integrity }}">
+    <link type="text/css" rel="stylesheet" href="{{ $lgFullscreen.RelPermalink | relURL }}" integrity="{{ $lgFullscreen.Data.Integrity }}">
+    <link type="text/css" rel="stylesheet" href="{{ $lgVideo.RelPermalink | relURL }}" integrity="{{ $lgVideo.Data.Integrity }}">
+    <link type="text/css" rel="stylesheet" href="{{ $lgMediumZoom.RelPermalink | relURL }}" integrity="{{ $lgMediumZoom.Data.Integrity }}">
+    <link type="text/css" rel="stylesheet" href="{{ $lgThumbnail.RelPermalink | relURL }}" integrity="{{ $lgThumbnail.Data.Integrity }}">
+    <link type="text/css" rel="stylesheet" href="{{ $lgPager.RelPermalink | relURL }}" integrity="{{ $lgPager.Data.Integrity }}">
+    <link type="text/css" rel="stylesheet" href="{{ $swiper.RelPermalink | relURL }}" integrity="{{ $swiper.Data.Integrity }}">
+    <link type="text/css" rel="stylesheet" href="{{ $custom.RelPermalink | relURL }}" integrity="{{ $custom.Data.Integrity }}">
+</head>

@@ -1,0 +1,3 @@
+{{- $resource := $.Page.Resources.GetMatch (.Get 0) -}}
+{{- $resource = $resource.Fit "1920x1080" -}}
+<img src="{{- $resource.Permalink | relURL }}" title="{{- (.Get 1) -}}" alt="{{- (.Get 1) -}}" class="zoomable">

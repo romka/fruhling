@@ -1,0 +1,5 @@
+{{- if eq .Page.Type "gallery" -}}
+    {{- partial "partials/list/one-third-width-gallery.html" . -}}
+{{- else -}}
+    {{- partial "partials/list/one-third-width-blog.html" . -}}
+{{- end -}}

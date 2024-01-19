@@ -1,0 +1,19 @@
+<nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+        <a class="navbar-brand logo" href="{{ site.BaseURL | relLangURL }}">{{ .Site.Title }}</a>
+        <button class="navbar-toggler hamburger-menu-btn" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span>toggle menu</span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+            {{- $currentPage := . -}}
+            {{- range .Site.Menus.main -}}
+                <li class="{{ if $currentPage.HasMenuCurrent "main" . }}active{{ else }}nav-item{{ end }}">
+                    <a class="nav-link" href="{{ .URL }}">{{ .Name }}</a>
+                </li>
+            {{- end -}}
+            </ul>
+        </div>
+    </div>
+</nav>

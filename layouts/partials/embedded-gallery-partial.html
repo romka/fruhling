@@ -1,0 +1,39 @@
+{{- $page := . -}}
+
+{{ $titleGalleryName := $page.Params.title_gallery }}
+{{- $path := printf "%s%s" "/embedded-gallery/" $titleGalleryName -}}
+{{ $gallery := .Site.GetPage $path }}
+
+{{ $lines := split $gallery.RawContent "\n" }}
+{{ $map := dict }}
+{{ range $lines }}
+    {{ $descr := split . ";" }}
+    {{ $map = merge $map (dict (index $descr 0) (index $descr 1)) }}
+{{ end }}
+
+<div class="post_img swiper">
+    <div class="swiper-wrapper title-gallery" style="text-align: center">
+        {{ range $gallery.Resources.ByType "image" }}
+            {{- $preview := .Fit "970x728" -}}
+            {{- $thumb := .Fit "96x76" -}}
+            {{- $title := index $map .Name -}}
+            {{- $image := .Fit "1920x1920 q90" -}}
+            {{- $originalImage := . -}}
+            {{- with .Exif -}}
+                {{- if eq 6 .Tags.Orientation -}}
+                    {{- $image = $originalImage.Fit "1920x1920 q90 r270" -}}
+                {{- else if eq 8 .Tags.Orientation -}}
+                    {{- $image = $originalImage.Fit "1920x1920 q90 r90" -}}
+                {{- else if eq 3 .Tags.Orientation -}}
+                    {{- $image = $originalImage.Fit "1920x1920 q90 r180" -}}
+                {{- end -}}
+            {{- end -}}
+            {{- $preview = $image.Fit "970x728 q100" -}}
+            {{- $thumb = $image.Fit "96x76 q100" -}}
+        <figure data-src="{{ $image.RelPermalink | relLangURL }}" data-thumb="{{ $thumb.RelPermalink | relLangURL }}" class="swiper-slide">
+            <img src="{{ $preview.RelPermalink | relLangURL }}" alt="{{ $title }}">
+        </figure>
+        {{ end }}
+    </div>
+    <div class="swiper-pagination"></div>
+</div>

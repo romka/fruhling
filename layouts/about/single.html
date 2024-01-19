@@ -1,0 +1,31 @@
+{{ define "content"}}
+<div class="container">
+    <div class="row large-gutters align-items-center custom-mb-60px">
+        <div class="col-lg-6 mb-40px mb-md-0">
+            <div class="swiper">
+                <div class="swiper-wrapper title-gallery">
+                    {{ $images := .Resources.ByType "image" }}
+                    {{ range $images }}
+                        {{ if strings.Contains .Permalink "cover" }}
+                    <figure data-src="{{ .RelPermalink | relURL }}" class="swiper-slide">
+                        <img src="{{ .RelPermalink | relURL }}" alt="about pic">
+                    </figure>
+                        {{ end }}
+                    {{ end }}
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+        <div class="col-lg-6 py-20px">
+            {{ .Content }}
+        </div>
+    </div>
+
+    <!-- featured posts -->
+    <div class="row blog_posts cardPostStyle">
+    {{- range first 3 (where .Site.RegularPages ".Params.featured" true) -}}
+        {{- partialCached "list/one-third-width-post.html" . .RelPermalink -}}
+    {{- end -}}
+    </div>
+</div>
+{{ end}}

@@ -1,0 +1,37 @@
+{{- $jquery := resources.Get "/js/jquery.min.js" | resources.Fingerprint -}}
+{{- $bootstrap := resources.Get "/js/plugins/bootstrap.bundle.min.js" | resources.Fingerprint -}}
+<script type="text/javascript" src="{{ $jquery.RelPermalink | relURL }}" integrity="{{ $jquery.Data.Integrity }}"></script>
+<script type="text/javascript" src="{{ $bootstrap.RelPermalink | relURL }}" integrity="{{ $bootstrap.Data.Integrity }}"></script>
+
+{{ $lightGalleryLicenseKey := "" }}
+{{- if .Site.Params.lightgallery.licenseKey -}}
+    {{ $lightGalleryLicenseKey = $.Site.Params.lightgallery.licenseKey }}
+{{ else }}
+    {{ $lightGalleryLicenseKey = "0000-0000-000-0000" }}
+{{- end -}}
+
+{{- $lightgallery := resources.Get "/libs/lightgallery/lightgallery.min.js" | resources.Fingerprint -}}
+{{- $lgFullscreen := resources.Get "/libs/lightgallery/plugins/fullscreen/lg-fullscreen.min.js" | resources.Fingerprint -}}
+{{- $lgMediumZoom := resources.Get "/libs/lightgallery/plugins/mediumZoom/lg-medium-zoom.min.js" | resources.Fingerprint -}}
+{{- $lgThumbnail := resources.Get "/libs/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" | resources.Fingerprint -}}
+{{- $lgVideo := resources.Get "/libs/lightgallery/plugins/video/lg-video.min.js" | resources.Fingerprint -}}
+{{- $lgPager := resources.Get "/libs/lightgallery/plugins/pager/lg-pager.min.js" | resources.Fingerprint -}}
+{{- $lgHash := resources.Get "/libs/lightgallery/plugins/hash/lg-hash.min.js" | resources.Fingerprint -}}
+{{- $swiper := resources.Get "/libs/swiper/swiper-bundle.min.js" | resources.Fingerprint -}}
+{{- $mansory := resources.Get "/libs/mansory/masonry.pkgd.min.js" | resources.Fingerprint -}}
+{{- $imagesloaded := resources.Get "/libs/mansory/imagesloaded.pkgd.min.js" | resources.Fingerprint -}}
+{{- $init := resources.Get "/js/init.js" | resources.Fingerprint -}}
+<script type="text/javascript" src="{{ $lightgallery.RelPermalink | relURL }}" integrity="{{ $lightgallery.Data.Integrity }}"></script>
+<script type="text/javascript" src="{{ $lgFullscreen.RelPermalink | relURL }}" integrity="{{ $lgFullscreen.Data.Integrity }}"></script>
+<script type="text/javascript" src="{{ $lgMediumZoom.RelPermalink | relURL }}" integrity="{{ $lgMediumZoom.Data.Integrity }}"></script>
+<script type="text/javascript" src="{{ $lgThumbnail.RelPermalink | relURL }}" integrity="{{ $lgThumbnail.Data.Integrity }}"></script>
+<script type="text/javascript" src="{{ $lgVideo.RelPermalink | relURL }}" integrity="{{ $lgVideo.Data.Integrity }}"></script>
+<script type="text/javascript" src="{{ $lgPager.RelPermalink | relURL }}" integrity="{{ $lgPager.Data.Integrity }}"></script>
+<script type="text/javascript" src="{{ $lgHash.RelPermalink | relURL }}" integrity="{{ $lgHash.Data.Integrity }}"></script>
+<script type="text/javascript" src="{{ $swiper.RelPermalink | relURL }}" integrity="{{ $swiper.Data.Integrity }}"></script>
+<script type="text/javascript" src="{{ $mansory.RelPermalink | relURL }}" integrity="{{ $mansory.Data.Integrity }}"></script>
+<script type="text/javascript" src="{{ $imagesloaded.RelPermalink | relURL }}" integrity="{{ $imagesloaded.Data.Integrity }}"></script>
+<script type="text/javascript">var lightGalleryLicenseKey = "{{ $lightGalleryLicenseKey }}";</script>
+<script type="text/javascript" src="{{ $init.RelPermalink | relURL }}" integrity="{{ $init.Data.Integrity }}"></script>
+
+{{- partialCached "shared/ga.html" . -}}

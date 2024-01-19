@@ -1,0 +1,42 @@
+{{- define "photomosaic" -}}
+    {{- partial "partials/shared/photomosaic.html" . -}}
+{{- end -}}
+
+{{ define "content"}}
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col-lg-10">
+            <div class="row blog_posts cardPostStyle">
+                <div class="col-md-12 col-lg-12">
+                    <article>
+                        {{ partial "shared/post-title-image-or-gallery.html" . }}
+                        {{- $topRadius := "" -}}
+                        {{- $images := .Resources.ByType "image" -}}
+                        {{- $image := ($images.GetMatch "*cover*")  -}}
+                        {{- $titleGalleryLen := len (string .Page.Params.title_gallery) -}}
+                        {{- $coverImageLen := len (string $image)  -}}
+                        {{- if and (eq $titleGalleryLen 0) (eq $coverImageLen 0) -}}{{- $topRadius = " post_text_top_radius" -}}{{- end -}}
+                        <div class="post_text{{ $topRadius }}">
+                            <div class="post_meta_top">
+                                {{- partial "partials/shared/links-to-translations.html" . .Page -}}
+                                {{- partial "partials/shared/tags.html" . -}}
+                                {{- partial "partials/shared/date.html" . -}}
+                            </div>
+                            <h1 class="post_title"><a href="{{ .RelPermalink | relURL }}">{{ .Title }}</a></h1>
+                            <div class="post_content padding_bottom">
+                                {{- if .Page.Params.deprecated -}}
+                                <p class="deprecated">
+                                    {{ i18n "deprecated" }}
+                                </p>
+                                {{- end -}}
+                                {{ .Content }}
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                {{- partial "partials/remark42/comments.html" . -}}
+            </div>
+        </div>
+    </div>
+</div>
+{{ end }}

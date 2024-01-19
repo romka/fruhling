@@ -1,0 +1,42 @@
+{{- $photos := slice -}}
+{{- $dirs := slice -}}
+{{- $photoDescriptions := dict -}}
+{{- $allowedExtentions := ".jpg .jpeg .gif .tiff .webp .svg .eps .ai .xcf .png" -}}
+
+{{- range readDir "/content/gallery" -}}
+    {{- $dirs = $dirs | append (printf "%s/%s" "/content/gallery/" .Name) -}}
+{{- end -}}
+
+{{- range $dir := $dirs -}}
+    {{- $galleries := readDir $dir -}}
+    {{- range $galleries -}}
+        {{- $galleryPath := printf "%s/%s" $dir .Name -}}
+        {{- $galleryContentPath := printf "%s/%s" (replace $dir "/content" "") .Name -}}
+
+        {{- $gallery := $.Site.GetPage $galleryContentPath -}}
+        {{- $galleryPath := $gallery.RelPermalink -}}
+        {{- $galleryTitle := $gallery.Title -}}
+
+        {{- $descriptions := dict -}}
+
+        {{- $lines := split $gallery.RawContent "\n" -}}
+        {{- range $lines -}}
+            {{- $descr := split . ";" -}}
+            {{- if strings.Contains (index $descr 0) ":" -}}
+                {{- $imgVideo := split (index $descr 0) ":"  -}}
+                {{- $descriptions = merge $descriptions (dict (index $imgVideo 0) (index $descr 1)) -}}
+            {{- else -}}
+                {{- $descriptions = merge $descriptions (dict (index $descr 0) (index $descr 1)) -}}
+            {{- end -}}
+        {{- end -}}
+
+        {{- range $gallery.Resources.ByType "image" -}}
+            {{- $photos = $photos | append . -}}
+            {{/* $photoDescriptions is a map of type String => (File, String, String)  */}}
+            {{/* where key is a file name, value is a tuple of (image, file description, gallery path, gallery title)  */}}
+            {{- $photoDescriptions = merge $photoDescriptions (dict .Name (slice . (index $descriptions .Name ) $galleryPath $galleryTitle )) -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+
+{{- return $photoDescriptions -}}

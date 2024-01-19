@@ -1,0 +1,22 @@
+{{- define "photomosaic" -}}
+    {{- partial "partials/shared/photomosaic.html" . -}}
+{{- end -}}
+
+{{- define "content" -}}
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col-lg-10">
+            <div class="row blog_posts cardPostStyle">
+                {{- $allowedTypes := .Site.Params.fruhling.indexPageContentTypes | default (slice "blog" "gallery" "note" "story") -}}
+                {{- range (where (where .Paginator.Pages "Type" "in" $allowedTypes) ".Params.unlisted" "!=" "true")  -}}
+                {{- partialCached "list/full-width-post.html" . .RelPermalink -}}
+                {{- end -}}
+            </div>
+
+            <nav class="pagination_holder">
+                {{ template "_internal/pagination.html" . }}
+            </nav>
+        </div>
+    </div>
+</div>
+{{- end -}}

@@ -1,0 +1,26 @@
+<div class="post_internal_gallery swiper">
+    <div class="swiper-wrapper title-gallery" style="text-align: center">
+        {{- range $.Params -}}
+            {{- $originalImage := $.Page.Resources.GetMatch . -}}
+            {{- $preview := $originalImage.Fit "970x728" -}}
+            {{- $thumb := $originalImage.Fit "96x76" -}}
+            {{- $image := $originalImage.Fit "1920x1920 q90" -}}
+            {{- with $originalImage.Exif -}}
+                {{- if eq 6 .Tags.Orientation -}}
+                    {{- $image = $originalImage.Fit "1920x1920 q90 r270" -}}
+                    {{- $preview = $image.Fit "970x728 q100" -}}
+                    {{- $thumb = $image.Fit "96x76 q100" -}}
+                {{- else if eq 8 .Tags.Orientation -}}
+                    {{- $image = $originalImage.Fit "1920x1920 q90 r90" -}}
+                    {{- $preview = $image.Fit "970x728 q100" -}}
+                    {{- $thumb = $image.Fit "96x76 q100" -}}
+                {{- end -}}
+            {{- end -}}
+
+        <figure data-src="{{ $image.RelPermalink | relLangURL }}" data-thumb="{{ $thumb.RelPermalink | relLangURL }}" class="swiper-slide">
+            <img src="{{ $preview.RelPermalink | relLangURL }}">
+        </figure>
+        {{- end -}}
+    </div>
+    <div class="swiper-pagination"></div>
+</div>

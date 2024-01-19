@@ -1,0 +1,84 @@
+{{- define "photomosaic" -}}
+{{- partial "partials/shared/photomosaic.html" . -}}
+{{- end -}}
+
+{{- define "content" -}}
+{{- $gallery := . -}}
+
+{{- $lines := split $gallery.RawContent "\n" -}}
+{{- $titles := dict -}}
+{{- $descriptions := dict -}}
+{{- $videos := dict -}}
+{{- range $lines -}}
+    {{- $descr := split . ";" -}}
+    {{- if strings.Contains (index $descr 0) ":" -}}
+        {{- $imgVideo := split (index $descr 0) ":"  -}}
+        {{- $titles = merge $titles (dict (index $imgVideo 0) (index $descr 1)) -}}
+        {{- $videos = merge $videos (dict (index $imgVideo 0) (index $imgVideo 1)) -}}
+    {{- else -}}
+        {{- $titles = merge $titles (dict (index $descr 0) (index $descr 1)) -}}
+    {{- end -}}
+    {{- $descriptions = merge $descriptions (dict (index $descr 0) (index $descr 2)) -}}
+{{- end -}}
+
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col-lg-10">
+            <div class="row blog_posts cardPostStyle">
+                <div class="col-md-12 col-lg-12">
+                    <article>
+                        <div class="post_text padding_bottom post_text_top_radius">
+                            <div class="post_meta_top">
+                                {{- partial "partials/shared/tags.html" . -}}
+                                {{- partial "partials/shared/date.html" . -}}
+                            </div>
+                            <h4 class="post_title"><a href="{{ .RelPermalink | relURL }}">{{ .Title }}</a></h4>
+
+                            <div class="masonry-gallery">
+                                <div class="grid-sizer"></div>
+                                <div class="title-gallery">
+                                    {{- range $gallery.Resources.ByType "image" -}}
+                                        {{- $title := index $titles .Name -}}
+                                        {{- $description := index $descriptions .Name -}}
+
+                                        {{- $image := .Fit "1920x1920 q90" -}}
+                                        {{- $originalImage := . -}}
+                                        {{- with .Exif -}}
+                                            {{- if eq 6 .Tags.Orientation -}}
+                                                {{- $image = $originalImage.Fit "1920x1920 q90 r270" -}}
+                                            {{- else if eq 8 .Tags.Orientation -}}
+                                                {{- $image = $originalImage.Fit "1920x1920 q90 r90" -}}
+                                            {{- else if eq 3 .Tags.Orientation -}}
+                                                {{- $image = $originalImage.Fit "1920x1920 q90 r180" -}}
+                                            {{- end -}}
+                                        {{- end -}}
+                                        {{- $preview := $image.Fit "970x728 q100" -}}
+                                        {{- $thumb := $image.Resize "240x q90" -}}
+
+                                        {{- if isset $videos .Name -}}
+                                            {{- if strings.Contains (index $videos .Name) "youtu" -}}
+                                            <figure data-src="{{- index $videos .Name -}}" data-poster="{{ $image.RelPermalink | relURL }}"{{ if $description }} data-sub-html="<strong>{{ $title }}</strong>. {{ $description }}"{{ end }} class="grid-item">
+                                                <img src="{{ $thumb.RelPermalink | relURL }}" alt="{{ $title }}">
+                                            </figure>
+                                            {{- else -}}
+                                            <figure data-video='{"source": [{"src":"{{- $gallery.RelPermalink -}}{{- index $videos .Name -}}", "type":"video/mp4"}], "attributes": {"preload": false, "controls": true}}' data-poster="{{ $image.RelPermalink | relURL }}"{{ if $description }} data-sub-html="<strong>{{ $title }}</strong>. {{ $description }}"{{ end }} class="grid-item">
+                                                <img src="{{ $thumb.RelPermalink | relURL }}" alt="{{ $title }}">
+                                            </figure>
+                                            {{- end -}}
+                                        {{- else -}}
+                                            <figure data-src="{{ $image.RelPermalink | relURL }}" data-thumb="{{ $thumb.RelPermalink | relURL }}"{{ if $description }} data-sub-html="<strong>{{ $title }}</strong>. {{ $description }}"{{ end }} class="grid-item">
+                                                <img src="{{ $thumb.RelPermalink | relURL }}" alt="{{ $title }}">
+                                            </figure>
+                                        {{- end -}}
+                                    {{- end -}}
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                {{- partial "partials/remark42/comments.html" . -}}
+            </div>
+        </div>
+    </div>
+</div>
+{{- end -}}

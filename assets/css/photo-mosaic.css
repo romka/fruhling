@@ -1,0 +1,76 @@
+#main-content {
+    overflow: hidden;
+}
+
+.title_photomosaic_container {
+    display: block;
+    height: 75px;
+    position: relative;
+}
+
+.title_photomosaic_container .container .page-title {
+    padding-top: 10px;
+}
+
+
+.title_photomosaic h4, .title_photomosaic h3 {
+    background: rgba(243, 243, 243, 0.85);
+    padding: 5px 10px;
+    display: block;
+    width: fit-content;
+}
+
+.title_photomosaic {
+    position: relative;
+    z-index: 10;
+    width: fit-content;
+}
+
+
+#photo-mosaic {
+    position: absolute;
+    display: flex;
+    top: 0;
+    z-index: 1;
+}
+
+#photo-mosaic a {
+    display: block;
+    width: 100px;
+    height: 75px;
+    cursor: default;
+    float: left;
+    text-decoration: none;
+}
+
+#photo-mosaic a .divimg, #photo-mosaic-block a .divimg {
+    display: block;
+    width: 100px;
+    height: 75px;
+    overflow: hidden;
+}
+
+#photo-mosaic a:hover, #photo-mosaic a:hover {
+    white-space: normal;
+    position: relative;
+    cursor: pointer;
+}
+
+#photo-mosaic a:hover .divimg, #photo-mosaic a:hover .divimg {
+    position: absolute;
+    left: -50px;
+    top: -32px;
+    z-index: 1000;
+    width: 200px;
+    height: 150px;
+    border-color: #fff;
+    cursor: pointer;
+}
+
+.divimg {
+    float: left;
+}
+
+.cb {
+    clear: both;
+}
