@@ -1,6 +1,6 @@
 # Hugo Frühling Theme
 
-This [Hugo](https://gohugo.io/) theme has been developed for the [Romka!eu](https://romka.eu/en) blog, where you can find a comprehensive demo showcasing the usage of this theme.
+This [Hugo](https://gohugo.io/) theme has been developed for the [Romka!eu](https://romka.eu/en) blog, [where you can find](https://github.com/romka/romka/) a comprehensive demo showcasing the usage of this theme.
 
 The theme utilizes the following JavaScript libraries:
 - [lightgallery](https://www.lightgalleryjs.com/),
@@ -16,7 +16,7 @@ Lightgallery is a paid library. To use it legitimately, you should purchase it a
 ## Features
 The Frühling theme defines four post types:
 - two text-based types: _blog_ and _note_,
-- and to photo-based types: gallery and story.
+- and to photo-based types: _gallery_ and _story_.
 
 In addition to custom post templates, the theme introduces several shortcodes:
 
