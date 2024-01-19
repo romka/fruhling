@@ -1,6 +1,6 @@
 # Hugo Frühling Theme
 
-This Hugo theme has been developed for the [Romka!eu](https://romka.eu/en) blog, where you can find a comprehensive demo showcasing the usage of this theme.
+This [Hugo](https://gohugo.io/) theme has been developed for the [Romka!eu](https://romka.eu/en) blog, where you can find a comprehensive demo showcasing the usage of this theme.
 
 The theme utilizes the following JavaScript libraries:
 - [lightgallery](https://www.lightgalleryjs.com/),
