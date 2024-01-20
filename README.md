@@ -18,6 +18,8 @@ The Frühling theme defines four post types:
 - two text-based types: _blog_ and _note_,
 - and to photo-based types: _gallery_ and _story_.
 
+Each of the content types has a distinct template: blogs and galleries are designed to be more extensive than their counterparts --- notes and stories.
+
 In addition to custom post templates, the theme introduces several shortcodes:
 
 - two types of galleries that can be embedded into a post: `embedded-gallery` and `embedded-local-gallery`. Galleries may contain both photos and videos,
