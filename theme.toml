@@ -2,7 +2,7 @@ name = "Frühling"
 license = "MIT"
 description = "Theme created for the https://romka.eu blog"
 homepage = "https://github.com/romka/fruhling"
-tags = ["Blog", "Responsive", "Personal", "Minimal", "Clean", "Google Analytics"]
+tags = ["Blog", "Responsive", "Personal", "Light", "Minimal", "Clean", "Gallery", "Multilingual", "Bootstrap", "Google Analytics"]
 features = []
 min_version = "0.0.1"
 
