@@ -1,15 +1,10 @@
-{{- with .Params.tags -}}
+{{- with .GetTerms "tags" -}}
 {{- $size := . | len -}}
-{{- if gt $size 0 -}}
+    {{- if gt $size 0 -}}
 <span class="post_meta_category">
-{{- range $index, $cat := . -}}
-    {{- if $index -}}
-    <a href="{{- "/tags/" | relLangURL -}}{{- $cat | urlize -}}">{{- $cat -}}</a>
-    {{- else -}}
-    <a href="{{- "/tags/" | relLangURL -}}{{- $cat | urlize -}}">{{- $cat | humanize -}}</a>
-    {{- end -}}
-    {{ if lt $index (sub $size 1) }}, {{ else }}{{ end }}
-{{- end -}}
+        {{- range $index, $cat := . -}}
+    <a href="{{ .RelPermalink }}">{{- .LinkTitle -}}</a>{{- if lt $index (sub $size 1) -}},&nbsp;{{- else -}}{{- end -}}
+        {{- end -}}
 </span>
-{{- end -}}
+    {{- end -}}
 {{- end -}}
