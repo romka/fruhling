@@ -1,0 +1,16 @@
+baseURL = 'http://localhost:8000'
+languageCode = 'en-us'
+title = 'Frühling demo'
+summaryLength = 25
+theme = 'fruhling'
+defaultcontentlanguage = 'en'
+languagecode = "en-us"
+enableRobotsTXT = true
+googleAnalytics = "???"
+timeout = "1800s"
+
+[markup.goldmark.renderer]
+    unsafe= true
+
+[params]
+    robots_txt_disallow_all = false

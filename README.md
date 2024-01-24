@@ -7,7 +7,7 @@ The theme utilizes the following JavaScript libraries:
 - [mansory](https://masonry.desandro.com/),
 - [swiper](https://swiperjs.com/).
 
-Lightgallery is a paid library. To use it legitimately, you should purchase it and insert your license key into the configuration:
+Lightgallery is a free and open-source library. However, to use it legitimately for business, commercial sites, projects, and applications, you should purchase it and insert your license key into the configuration:
 ```
 [lightgallery]
     licenseKey = 'your-license-key'

@@ -1,12 +1,12 @@
-name = "fruhling"
+name = "Frühling"
 license = "MIT"
 description = "Theme created for the https://romka.eu blog"
-homepage = "https://romka.eu"
-tags = ["Blog", "Responsive", "Personal", "Minimal", "Clean", "Disqus", "Google Analytics"]
+homepage = "https://github.com/romka/fruhling"
+tags = ["Blog", "Responsive", "Personal", "Minimal", "Clean", "Google Analytics"]
 features = []
 min_version = "0.0.1"
 
 [author]
-    name = "romka"
+    name = "Roman Arkharov"
     homepage = "https://romka.eu"
 
