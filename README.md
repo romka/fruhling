@@ -1,6 +1,6 @@
 # Hugo Frühling Theme
 
-This [Hugo](https://gohugo.io/) theme has been developed for the [Romka!eu](https://romka.eu/en) blog, [where you can find](https://github.com/romka/romka/) a comprehensive demo showcasing the usage of this theme.
+This [Hugo](https://gohugo.io/) theme has been developed for the [Romka!eu](https://romka.eu/en) blog, [where you can find](https://github.com/romka/romka/) a comprehensive demo showcasing the usage of this theme. A simplified demo is available in this repository https://github.com/romka/fruhling-demo, its rendered version is deployed to GitHub Pages: https://romka.github.io/fruhling-demo/.
 
 The theme utilizes the following JavaScript libraries:
 - [lightgallery](https://www.lightgalleryjs.com/),
