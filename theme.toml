@@ -1,9 +1,11 @@
 name = "Frühling"
 license = "MIT"
-description = "Theme created for the https://romka.eu blog"
+licenselink = "https://github.com/romka/fruhling/blob/main/LICENSE"
+description = "Theme is designed for blogs with long posts and lots of photos, and photo galleries that can be embedded in posts."
 homepage = "https://github.com/romka/fruhling"
+demosite = "https://romka.github.io/fruhling-demo/"
 tags = ["Blog", "Responsive", "Personal", "Light", "Minimal", "Clean", "Gallery", "Multilingual", "Bootstrap", "Google Analytics"]
-features = []
+features = ["Gallery", "Embedded gallery"]
 min_version = "0.98.0"
 
 [author]
