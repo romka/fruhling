@@ -7,6 +7,10 @@
     {{- $dirs = $dirs | append (printf "%s/%s" "/content/gallery/" .Name) -}}
 {{- end -}}
 
+{{- range readDir "/content/story" -}}
+    {{- $dirs = $dirs | append (printf "%s/%s" "/content/story/" .Name) -}}
+{{- end -}}
+
 {{- range $dir := $dirs -}}
     {{- $galleries := readDir $dir -}}
     {{- range $galleries -}}

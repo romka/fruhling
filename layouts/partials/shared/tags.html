@@ -3,7 +3,7 @@
     {{- if gt $size 0 -}}
 <span class="post_meta_category">
         {{- range $index, $cat := . -}}
-    <a href="{{ .RelPermalink }}">{{- .LinkTitle -}}</a>{{- if lt $index (sub $size 1) -}},&nbsp;{{- else -}}{{- end -}}
+    <a href="{{ .RelPermalink }}">{{- .LinkTitle -}}</a>{{ if lt $index (sub $size 1) }}, {{ else }}{{ end }}
         {{- end -}}
 </span>
     {{- end -}}
