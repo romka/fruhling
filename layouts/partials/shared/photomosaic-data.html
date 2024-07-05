@@ -4,11 +4,11 @@
 {{- $allowedExtentions := ".jpg .jpeg .gif .tiff .webp .svg .eps .ai .xcf .png" -}}
 
 {{- range readDir "/content/gallery" -}}
-    {{- $dirs = $dirs | append (printf "%s/%s" "/content/gallery/" .Name) -}}
+    {{- $dirs = $dirs | append (printf "%s/%s" "/content/gallery" .Name) -}}
 {{- end -}}
 
 {{- range readDir "/content/story" -}}
-    {{- $dirs = $dirs | append (printf "%s/%s" "/content/story/" .Name) -}}
+    {{- $dirs = $dirs | append (printf "%s/%s" "/content/story" .Name) -}}
 {{- end -}}
 
 {{- range $dir := $dirs -}}
