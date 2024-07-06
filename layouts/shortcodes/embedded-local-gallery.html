@@ -17,8 +17,8 @@
                 {{- end -}}
             {{- end -}}
 
-        <figure data-src="{{ $image.RelPermalink | relLangURL }}" data-thumb="{{ $thumb.RelPermalink | relLangURL }}" class="swiper-slide">
-            <img src="{{ $preview.RelPermalink | relLangURL }}">
+        <figure data-src="{{ $image.RelPermalink | relURL }}" data-thumb="{{ $thumb.RelPermalink | relURL }}" class="swiper-slide">
+            <img src="{{ $preview.RelPermalink | relURL }}">
         </figure>
         {{- end -}}
     </div>
