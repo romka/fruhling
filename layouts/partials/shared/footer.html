@@ -6,13 +6,12 @@
                     <div class="footer-widget">
                         {{ $footerPath := "" }}
                         {{ if fileExists (printf "%s%s%s" "/content/footer/index." .Site.Language.Lang ".md") }}
-                            {{ $footerPath = (printf "%s%s%s" "/content/footer/index." .Site.Language.Lang ".md") }}
+                            {{ $footerPath = (printf "%s%s%s" "/footer/index." .Site.Language.Lang ".md") }}
                         {{ else }}
                             {{ if fileExists "/content/footer/index.en.md" }}
-                                {{ $footerPath = "/content/footer/index.en.md" }}
+                                {{ $footerPath = "/footer/index.en.md" }}
                             {{ end }}
                         {{ end }}
-
                         {{ if $footerPath }}
                             {{ $footer := .Site.GetPage $footerPath }}
                         <p>{{ $footer.Content }}</p>
