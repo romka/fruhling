@@ -4,7 +4,7 @@ This [Hugo](https://gohugo.io/) theme has been developed for the [Romka!eu](http
 
 The theme utilizes the following JavaScript libraries:
 - [lightgallery](https://www.lightgalleryjs.com/),
-- [mansory](https://masonry.desandro.com/),
+- [masonry](https://masonry.desandro.com/),
 - [swiper](https://swiperjs.com/).
 
 Lightgallery is a free and open-source library. However, to use it legitimately for business, commercial sites, projects, and applications, you should purchase it and insert your license key into the configuration:

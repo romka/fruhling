@@ -18,8 +18,8 @@
 {{- $lgPager := resources.Get "/libs/lightgallery/plugins/pager/lg-pager.min.js" | resources.Fingerprint -}}
 {{- $lgHash := resources.Get "/libs/lightgallery/plugins/hash/lg-hash.min.js" | resources.Fingerprint -}}
 {{- $swiper := resources.Get "/libs/swiper/swiper-bundle.min.js" | resources.Fingerprint -}}
-{{- $mansory := resources.Get "/libs/mansory/masonry.pkgd.min.js" | resources.Fingerprint -}}
-{{- $imagesloaded := resources.Get "/libs/mansory/imagesloaded.pkgd.min.js" | resources.Fingerprint -}}
+{{- $masonry := resources.Get "/libs/masonry/masonry.pkgd.min.js" | resources.Fingerprint -}}
+{{- $imagesloaded := resources.Get "/libs/masonry/imagesloaded.pkgd.min.js" | resources.Fingerprint -}}
 {{- $init := resources.Get "/js/init.js" | resources.Fingerprint -}}
 <script type="text/javascript" src="{{ $lightgallery.RelPermalink | relURL }}" integrity="{{ $lightgallery.Data.Integrity }}"></script>
 <script type="text/javascript" src="{{ $lgFullscreen.RelPermalink | relURL }}" integrity="{{ $lgFullscreen.Data.Integrity }}"></script>
@@ -29,7 +29,7 @@
 <script type="text/javascript" src="{{ $lgPager.RelPermalink | relURL }}" integrity="{{ $lgPager.Data.Integrity }}"></script>
 <script type="text/javascript" src="{{ $lgHash.RelPermalink | relURL }}" integrity="{{ $lgHash.Data.Integrity }}"></script>
 <script type="text/javascript" src="{{ $swiper.RelPermalink | relURL }}" integrity="{{ $swiper.Data.Integrity }}"></script>
-<script type="text/javascript" src="{{ $mansory.RelPermalink | relURL }}" integrity="{{ $mansory.Data.Integrity }}"></script>
+<script type="text/javascript" src="{{ $masonry.RelPermalink | relURL }}" integrity="{{ $masonry.Data.Integrity }}"></script>
 <script type="text/javascript" src="{{ $imagesloaded.RelPermalink | relURL }}" integrity="{{ $imagesloaded.Data.Integrity }}"></script>
 <script type="text/javascript">var lightGalleryLicenseKey = "{{ $lightGalleryLicenseKey }}";</script>
 <script type="text/javascript" src="{{ $init.RelPermalink | relURL }}" integrity="{{ $init.Data.Integrity }}"></script>
