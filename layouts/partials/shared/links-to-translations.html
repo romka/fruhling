@@ -1,20 +1,7 @@
 {{- if .Page.IsTranslated -}}
-    {{- $availableLanguages := .Site.Languages -}}
-    {{- $availableTranslations := dict -}}
-    {{- $currentLanguage := .Page.Language -}}
-    {{- $remainingTranslations := $availableLanguages | symdiff (slice $currentLanguage) -}}
-    {{- range $translatedUrl := .Page.Translations -}}
-        {{- range $remainingTranslation := $remainingTranslations -}}
-            {{- if strings.Contains $translatedUrl (printf ".%s." $remainingTranslation) -}}
-            {{- $tuple := dict (string $remainingTranslation) $translatedUrl -}}
-            {{- $availableTranslations = merge $availableTranslations $tuple -}}
-        {{- end -}}
-        {{- end -}}
-    {{- end -}}
-
     <span class="post_meta_translations">
-    {{- range $name, $link := $availableTranslations -}}
-        <a href="{{- $link.RelPermalink -}}">{{- $name -}}</a>
+    {{- range $translatedUrl := .Page.Translations -}}
+        <a href="{{- $translatedUrl.RelPermalink -}}">{{- $translatedUrl.Language.LanguageCode -}}</a>
     {{- end -}}
     </span>
 {{- end -}}
