@@ -3,12 +3,16 @@
 {{- $photoDescriptions := dict -}}
 {{- $allowedExtentions := ".jpg .jpeg .gif .tiff .webp .svg .eps .ai .xcf .png" -}}
 
-{{- range readDir "/content/gallery" -}}
-    {{- $dirs = $dirs | append (printf "%s/%s" "/content/gallery" .Name) -}}
+{{- if fileExists "/content/gallery" -}}
+    {{- range readDir "/content/gallery" -}}
+        {{- $dirs = $dirs | append (printf "%s/%s" "/content/gallery" .Name) -}}
+    {{- end -}}
 {{- end -}}
 
-{{- range readDir "/content/story" -}}
-    {{- $dirs = $dirs | append (printf "%s/%s" "/content/story" .Name) -}}
+{{- if fileExists "/content/story" -}}
+    {{- range readDir "/content/story" -}}
+        {{- $dirs = $dirs | append (printf "%s/%s" "/content/story" .Name) -}}
+    {{- end -}}
 {{- end -}}
 
 {{- range $dir := $dirs -}}
