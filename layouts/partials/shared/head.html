@@ -7,6 +7,7 @@
     <title>{{ .Page.Title }} | {{ .Site.Title }}</title>
     {{ with .Site.Params.meta.description }}<meta name="description" content="{{ . }}">{{ end }}
     {{ with .Site.Params.meta.keywords }}<meta name="keywords" content="{{ . }}">{{ end }}
+    {{ with .Site.Params.canonicalURL }}<link rel="canonical" href="{{ . }}{{ $.Page.RelPermalink | relURL }}">{{ end }}
 
     {{- partial "partials/shared/opengraph.html" . -}}
 
