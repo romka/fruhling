@@ -370,3 +370,19 @@ article img.zoomable {
     height: 100%;
     border:0;
 }
+
+spoiler {
+    display: inline-block;
+    filter: blur(5px);
+    transition: filter 0.3s ease;
+    cursor: pointer;
+    user-select: none;
+}
+
+spoiler:hover {
+    filter: blur(4px);
+}
+
+spoiler:active {
+    filter: blur(0);
+}
