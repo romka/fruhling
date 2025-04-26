@@ -84,3 +84,9 @@ document.querySelectorAll('.default-hidden').forEach(function(item) {
 document.querySelectorAll('.gallery-list-title').forEach(function (item) {
     item.setAttribute("z-index", "1000");
 })
+
+$(document).ready(function() {
+    $('spoiler').click(function() {
+        $(this).toggleClass('revealed');
+    });
+});
